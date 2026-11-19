@@ -1,158 +1,1729 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tristan Reyes — Computer Engineering Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lexend:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#05070f;--ink:#e9ebf2;--dim:#aab0c3;--gold:#f2c230;--line:rgba(255,255,255,.14);--card:rgba(14,18,32,.62);
---head:"Archivo Black","Arial Black",Impact,sans-serif;--body:"Lexend","Segoe UI",Arial,sans-serif;box-sizing:border-box;
-padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-*,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65;overflow-x:hidden}
-#sky{position:fixed;inset:0;width:100%;height:100%;z-index:-2}
-.milky{position:fixed;inset:-20%;z-index:-1;pointer-events:none;
-background:radial-gradient(60% 14% at 50% 50%,rgba(150,170,255,.16),transparent 70%);transform:rotate(-28deg)}
-.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;gap:6px;flex-wrap:wrap;margin:16px auto 0;width:max-content;max-width:calc(100% - 24px);
-padding:6px;border:1px solid var(--line);border-radius:999px;background:rgba(8,11,22,.7);backdrop-filter:blur(10px)}
-nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:.9rem;padding:8px 16px;border-radius:999px;transition:.25s}
-nav a:hover{background:var(--gold);color:#111}
-.hero{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:60px 0}
-h1{font-family:var(--head);font-weight:400;font-size:clamp(2.6rem,8vw,6rem);line-height:1.05;margin:0 0 28px;color:#d4d6de;letter-spacing:-.01em}
-.pill{display:inline-block;background:var(--gold);color:#0b0b0b;padding:.04em .32em .1em;border-radius:.28em;transform:rotate(-2.5deg);
-box-shadow:0 12px 40px rgba(242,194,48,.28);transition:transform .35s cubic-bezier(.3,1.6,.5,1);cursor:default;margin-top:.1em}
-.pill:hover{transform:rotate(1.5deg) scale(1.05)}
-.lead{max-width:640px;font-size:1.08rem;color:var(--dim)}
-.lead b{color:var(--ink);font-weight:600}
-.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-.tags span,.chips span{border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:.88rem;font-weight:600;background:rgba(255,255,255,.04);transition:.25s}
-.tags span:hover,.chips span:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
-hr{border:0;height:2px;background:linear-gradient(90deg,transparent,#fff 15%,#fff 85%,transparent);opacity:.85;margin:0}
-section{padding:90px 0 20px}
-h2{font-family:var(--head);font-weight:400;font-size:clamp(2rem,5vw,3.4rem);margin:0 0 30px;color:#d4d6de}
-h2 small{display:block;font-family:var(--body);font-weight:800;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;backdrop-filter:blur(6px)}
-.status{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
-.status i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 1.6s infinite}
-@keyframes pulse{50%{opacity:.25;transform:scale(1.6)}}
-h3{font-size:1.4rem;margin:12px 0 10px;font-weight:800;line-height:1.3}
-.card p{color:var(--dim);margin:0 0 6px}
-.diagram{margin-top:26px;overflow-x:auto}
-.diagram svg{min-width:640px;width:100%;height:auto;display:block}
-.box{fill:#0e1426;stroke:rgba(255,255,255,.28);stroke-width:1.5}
-.lab{fill:#e9ebf2;font:600 13px var(--body);text-anchor:middle}
-.sub{fill:#8e95ab;font:400 11px var(--body);text-anchor:middle}
-.wire{stroke:#f2c230;stroke-width:2;fill:none;stroke-dasharray:6 8;animation:flow 1.2s linear infinite;opacity:.9}
-@keyframes flow{to{stroke-dashoffset:-14}}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.grid .card{transition:.3s}
-.grid .card:hover{transform:translateY(-6px);border-color:var(--gold)}
-.num{font-family:var(--head);font-size:2.2rem;color:var(--gold);line-height:1}
-.stack{display:grid;gap:22px}
-.stack h4{margin:0 0 10px;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-.chips{display:flex;flex-wrap:wrap;gap:10px}
-.goal{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:600;max-width:760px;line-height:1.45}
-.goal mark{background:var(--gold);color:#0b0b0b;padding:0 .3em;border-radius:.25em}
-.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.links a{color:#111;background:var(--gold);text-decoration:none;font-weight:800;padding:13px 24px;border-radius:999px;transition:.3s}
-.links a.icon:hover{border-color:var(--gold);color:var(--gold)}
-.links a.icon.alt:hover{background:rgba(242,194,48,.1)}
-.links a.icon{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;padding:0;border-radius:50%}
-.links a.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.links a:hover{transform:translateY(-4px) rotate(-1.5deg);box-shadow:0 10px 30px rgba(242,194,48,.25)}
-footer{padding:70px 0 50px;color:var(--dim);font-size:.85rem}
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
-.rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.wire,.status i{animation:none}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tristan Reyes | Computer Engineering Portfolio &amp; Resume</title>
+  <meta
+    name="description"
+    content="Portfolio and interactive resume of Tristan Reyes — 4th-Year Computer Engineering Student specializing in Embedded Systems, IoT Applications, Full-Stack Development & Rapid Prototyping."
+  />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            obsidian: {
+              950: '#060A12',
+              900: '#0B1120',
+              850: '#0F172A',
+              800: '#152036',
+            },
+          },
+          boxShadow: {
+            'glow-cyan': '0 0 30px -5px rgba(6, 182, 212, 0.25)',
+            'glow-emerald': '0 0 24px -4px rgba(16, 185, 129, 0.25)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ==========================================================================
+       Custom Design Tokens, PCB Circuit Grid & Telemetry Micro-Interactions
+       ========================================================================== */
+    :root {
+      --grid-line: rgba(14, 116, 144, 0.08);
+      --grid-dot: rgba(6, 182, 212, 0.22);
+    }
+
+    html.dark {
+      --grid-line: rgba(34, 211, 238, 0.06);
+      --grid-dot: rgba(34, 211, 238, 0.18);
+    }
+
+    /* Subtle PCB / Oscilloscope Circuit Grid Background */
+    .pcb-grid-bg {
+      background-image:
+        radial-gradient(circle at 1px 1px, var(--grid-dot) 1px, transparent 0),
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px, 32px 32px, 32px 32px;
+      background-position: -1px -1px, 0 0, 0 0;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 182, 212, 0.6);
+    }
+
+    /* Smooth Card Hover Lift */
+    .telemetry-card {
+      transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.24s ease,
+                  box-shadow 0.24s ease;
+    }
+    .telemetry-card:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Modal Backdrop & Entrance Animation */
+    .modal-backdrop {
+      transition: opacity 0.22s ease;
+    }
+    .modal-panel {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
+    }
+
+    /* ==========================================================================
+       Print / Save Resume PDF Stylesheet (@media print)
+       Ensures dark mode converts cleanly to executive white-paper CV format
+       ========================================================================== */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 10.5pt !important;
+        line-height: 1.45 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Hide non-resume interactive UI chrome */
+      .no-print,
+      header,
+      #hero-visual-panel,
+      #hero-ctas,
+      #projects-section,
+      #approach-section,
+      #contact-section,
+      footer,
+      #project-modal,
+      #toast-container {
+        display: none !important;
+      }
+
+      /* Show dedicated executive print header */
+      .print-only-header {
+        display: block !important;
+        border-bottom: 2px solid #0f172a !important;
+        padding-bottom: 10px !important;
+        margin-bottom: 14px !important;
+      }
+
+      /* Reset main container padding for full page width */
+      main {
+        padding-top: 0 !important;
+      }
+
+      section {
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* Strip dark backgrounds and shadows across cards */
+      .print-clean-surface,
+      .bg-obsidian-900,
+      .bg-obsidian-850,
+      .bg-slate-900,
+      .bg-slate-950,
+      .dark\:bg-obsidian-900\/80,
+      .dark\:bg-slate-900\/70 {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+        border-color: #cbd5e1 !important;
+      }
+
+      .text-slate-100,
+      .text-slate-200,
+      .text-slate-300,
+      .dark\:text-slate-100,
+      .dark\:text-slate-200,
+      .dark\:text-slate-300,
+      .dark\:text-white {
+        color: #0f172a !important;
+      }
+
+      .text-slate-400,
+      .text-slate-500,
+      .dark\:text-slate-400 {
+        color: #334155 !important;
+      }
+
+      .text-cyan-400,
+      .text-cyan-500,
+      .dark\:text-cyan-400 {
+        color: #0e7490 !important;
+      }
+
+      .text-emerald-400,
+      .dark\:text-emerald-400 {
+        color: #047857 !important;
+      }
+
+      /* Keep resume & skills compact and prevent awkward page splits */
+      #resume-section,
+      #skills-section {
+        display: block !important;
+        page-break-inside: avoid;
+      }
+
+      .print-break-inside-avoid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
 </head>
-<body>
-<canvas id="sky"></canvas><div class="milky"></div>
-<nav><a href="#projects">Projects</a><a href="#work">What I do</a><a href="#stack">Tech Stack</a><a href="#contact">Contact</a></nav>
 
-<main class="wrap">
-<header class="hero">
-<h1>Hi, I’m<br><span class="pill">Tristan Reyes</span></h1>
-<p class="lead">I’m a 4th-year <b>Computer Engineering</b> student specializing in embedded systems, IoT applications, and front-end and back-end development. From wiring microcontrollers to building responsive interfaces and scalable server logic, I combine solid engineering fundamentals with AI-assisted workflows to take ideas from concept to working build fast.</p>
-<div class="tags"><span>Embedded systems</span><span>IoT</span><span>Front-end &amp; Back-end Dev</span><span>Rapid AI-assisted prototyping</span></div>
-</header>
-</main>
-<hr>
+<body class="bg-slate-50 text-slate-900 dark:bg-obsidian-950 dark:text-slate-100 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-cyan-200 transition-colors duration-300">
 
-<main class="wrap">
-<section id="projects" class="rv">
-<h2><small>01 — Capstone</small>Project</h2>
-<div class="card">
-<span class="status"><i></i>In development</span>
-<h3>IoT-Based Drying System for Paddy Rice and Coconut Kernels</h3>
-<p>A drying system that combines a Raspberry Pi 4 and an Arduino with environmental sensors, solar and infrared heating, and automated grain agitation, so the drying process can be monitored and controlled instead of left to chance.</p>
-<div class="diagram">
-<svg viewBox="0 0 760 250" role="img" aria-label="Block diagram: environmental sensors feed an Arduino, which connects to a Raspberry Pi 4. The Arduino drives relays that switch the solar and infrared heating and the grain agitator.">
-<g class="box"><rect x="10" y="95" width="150" height="62" rx="14" class="box"/><rect x="215" y="95" width="140" height="62" rx="14" class="box"/><rect x="215" y="10" width="140" height="56" rx="14" class="box"/><rect x="410" y="95" width="130" height="62" rx="14" class="box"/><rect x="595" y="40" width="155" height="56" rx="14" class="box"/><rect x="595" y="156" width="155" height="56" rx="14" class="box"/></g>
-<path class="wire" d="M160 126H215"/><path class="wire" d="M285 95V66"/><path class="wire" d="M355 126H410"/><path class="wire" d="M540 126H568V68H595"/><path class="wire" d="M568 126V184H595"/>
-<text class="lab" x="85" y="123">Environmental</text><text class="sub" x="85" y="141">sensors</text>
-<text class="lab" x="285" y="123">Arduino</text><text class="sub" x="285" y="141">sensor + relay I/O</text>
-<text class="lab" x="285" y="35">Raspberry Pi 4</text><text class="sub" x="285" y="52">control + data</text>
-<text class="lab" x="475" y="131">Relays</text>
-<text class="lab" x="672" y="73">Solar / IR heat</text><text class="lab" x="672" y="189">Grain agitator</text>
-</svg></div>
-</div>
-</section>
+  <!-- ========================================================================
+       STICKY TOP NAVIGATION BAR
+       ======================================================================== -->
+  <header class="no-print sticky top-0 z-40 w-full backdrop-blur-xl bg-white/85 dark:bg-obsidian-950/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Identity -->
+        <a href="#about" class="flex items-center gap-2.5 group focus:outline-none">
+          <div class="w-9 h-9 rounded-xl bg-slate-900 dark:bg-cyan-500/10 border border-slate-800 dark:border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono font-bold text-sm shadow-sm group-hover:border-cyan-400 transition-colors">
+            TR
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white leading-none">
+              Tristan Reyes
+            </span>
+            <span class="font-mono text-[10px] tracking-wider uppercase text-slate-500 dark:text-cyan-400/80 mt-0.5 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              CpE • Portfolio
+            </span>
+          </div>
+        </a>
 
-<section id="work" class="rv">
-<h2><small>02 — Focus</small>What I do</h2>
-<div class="grid">
-<div class="card"><div class="num">01</div><h3>Vibe coding &amp; rapid prototyping</h3><p>I build web apps, automations, and utility tools with AI coding assistants and prompt-driven workflows, then iterate until they work.</p></div>
-<div class="card"><div class="num">02</div><h3>Core interests</h3><p>Embedded firmware, hardware-software interfacing, PCB design, and AI-accelerated software development.</p></div>
-</div>
-</section>
+        <!-- Desktop Navigation Links -->
+        <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-1">
+          <a href="#about" data-nav-link="about" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+            About
+          </a>
+          <a href="#projects" data-nav-link="projects" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+            Projects
+          </a>
+          <a href="#skills" data-nav-link="skills" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+            Skills
+          </a>
+          <a href="#resume" data-nav-link="resume" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+            Resume
+          </a>
+          <a href="#contact" data-nav-link="contact" class="nav-link px-3.5 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
+            Contact
+          </a>
+        </nav>
 
-<section id="stack" class="rv">
-<h2><small>03 — Toolbox</small>Tech Stack</h2>
-<div class="stack">
-<div><h4>Languages</h4><div class="chips"><span>C++</span><span>Python</span><span>Java</span></div></div>
-<div><h4>Hardware &amp; embedded</h4><div class="chips"><span>Raspberry Pi 4</span><span>Arduino</span><span>Digital logic circuits</span><span>PCB design</span><span>Sensor &amp; relay interfacing</span></div></div>
-<div><h4>AI &amp; vibe coding</h4><div class="chips"><span>AI coding assistants</span><span>Rapid app prototyping</span><span>Workflow automation</span></div></div>
-<div><h4>Simulation &amp; CAD</h4><div class="chips"><span>Tinkercad</span><span>Siemens Solid Edge</span><span>Scilab</span></div></div>
-</div>
-</section>
+        <!-- Action Controls: Theme Toggle, Print Resume PDF & Mobile Menu -->
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <!-- Dark / Light Theme Toggle -->
+          <button
+            id="theme-toggle"
+            type="button"
+            aria-label="Toggle Dark or Light Mode"
+            title="Toggle Dark / Light Mode"
+            class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/90 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
+          >
+            <!-- Sun Icon (shown in Dark Mode) -->
+            <svg id="icon-sun" class="w-4 h-4 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <!-- Moon Icon (shown in Light Mode) -->
+            <svg id="icon-moon" class="w-4 h-4 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
 
-<section class="rv"><h2><small>04 — Next</small>Current goal</h2>
-<p class="goal">I’m seeking <mark>entry-level</mark> opportunities in Embedded Systems, IoT Engineering, or Software Development.</p></section>
+          <!-- Prominent Print / Save Resume PDF Button -->
+          <button
+            type="button"
+            onclick="triggerPrintResume()"
+            class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-600 hover:bg-cyan-500 dark:bg-cyan-500 dark:hover:bg-cyan-400 text-white dark:text-slate-950 shadow-sm shadow-cyan-500/20 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            <span class="hidden sm:inline">Print / Save Resume PDF</span>
+            <span class="sm:hidden">Resume PDF</span>
+          </button>
 
-<section id="contact" class="rv">
-<h2><small>05 — Say hi</small>Get in touch</h2>
-<p class="lead">Hiring or want to talk about a project? Reach me here.</p>
-<div class="links"><a class="icon" href="mailto:tristanreyes885@gmail.com" aria-label="Email Tristan" title="Email me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg></a><a class="alt icon" href="https://www.linkedin.com/in/tristan-reyes-2728a8262/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11.5H3V9.75Zm6.5 0h3.83v1.57h.06c.53-1 1.84-2.07 3.79-2.07 4.05 0 4.8 2.67 4.8 6.13v5.87h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4V9.75Z"/></svg></a><a class="alt icon" href="https://github.com/Seytri" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a></div>
-</section>
-<footer>© 2026 Tristan Reyes</footer>
-</main>
+          <!-- Mobile Hamburger Button -->
+          <button
+            id="mobile-menu-btn"
+            type="button"
+            aria-label="Open Navigation Menu"
+            aria-expanded="false"
+            class="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/90 text-slate-700 dark:text-slate-300 hover:text-cyan-400 transition-colors"
+          >
+            <svg id="menu-open-icon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="menu-close-icon" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
-<script>
-(function(){
-var c=document.getElementById('sky'),x=c.getContext('2d'),S=[],W,H,dpr=Math.min(devicePixelRatio||1,2),shoot=null;
-function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
-var n=Math.round(W*H/2600);S=[];for(var i=0;i<n;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.2,p:Math.random()*6.28,s:Math.random()*1.5+.4})}
-size();addEventListener('resize',size);
-var mx=0,my=0;addEventListener('pointermove',function(e){mx=(e.clientX/W-.5);my=(e.clientY/H-.5)});
-var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-function draw(t){x.clearRect(0,0,W,H);
-S.forEach(function(s){var a=.45+.55*Math.sin(t/1000*s.s+s.p);x.globalAlpha=Math.max(.1,a);x.fillStyle='#fff';
-x.beginPath();x.arc(s.x+mx*s.r*14,s.y+my*s.r*14,s.r,0,6.283);x.fill()});
-if(!reduce&&!shoot&&Math.random()<.004)shoot={x:Math.random()*W*.8,y:Math.random()*H*.4,l:0};
-if(shoot){shoot.l+=14;shoot.x+=9;shoot.y+=5;var g=x.createLinearGradient(shoot.x,shoot.y,shoot.x-90,shoot.y-50);
-g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,255,255,0)');x.globalAlpha=1;x.strokeStyle=g;x.lineWidth=1.6;
-x.beginPath();x.moveTo(shoot.x,shoot.y);x.lineTo(shoot.x-90,shoot.y-50);x.stroke();if(shoot.l>600)shoot=null}
-if(!reduce)requestAnimationFrame(draw)}
-requestAnimationFrame(draw);
-var io=new IntersectionObserver(function(e){e.forEach(function(i){if(i.isIntersecting){i.target.classList.add('in');io.unobserve(i.target)}})},{threshold:.12});
-document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
-})();
-</script>
+      <!-- Mobile Dropdown Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-slate-200/80 dark:border-slate-800/80">
+        <div class="flex flex-col gap-1">
+          <a href="#about" class="mobile-nav-link px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70">About</a>
+          <a href="#projects" class="mobile-nav-link px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70">Projects</a>
+          <a href="#skills" class="mobile-nav-link px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70">Skills</a>
+          <a href="#resume" class="mobile-nav-link px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70">Resume</a>
+          <a href="#contact" class="mobile-nav-link px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70">Contact</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       DEDICATED PRINT-ONLY EXECUTIVE CV HEADER (Hidden on screen, shown on PDF)
+       ======================================================================== -->
+  <div class="print-only-header hidden max-w-6xl mx-auto px-4">
+    <div class="flex flex-wrap items-baseline justify-between gap-2">
+      <div>
+        <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">TRISTAN REYES</h1>
+        <p class="text-sm font-semibold text-cyan-800">
+          4th-Year Computer Engineering Student — Embedded Systems, IoT Applications, Full-Stack Development &amp; Rapid Prototyping
+        </p>
+      </div>
+      <div class="text-right font-mono text-xs text-slate-700">
+        <div>Metro Manila, Philippines</div>
+        <div class="font-semibold text-emerald-800">Open to Entry-Level Roles • Available Dec 20, 2026</div>
+      </div>
+    </div>
+    <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1 font-mono text-xs text-slate-700">
+      <span>Email: tristanreyes885@gmail.com</span>
+      <span>GitHub: github.com/Seytri</span>
+      <span>LinkedIn: linkedin.com/in/tristan-reyes-2728a8262</span>
+    </div>
+    <p class="mt-2 text-xs text-slate-700">
+      4th-year Computer Engineering student specializing in embedded systems, IoT applications, and front-end and back-end development. Combines solid engineering fundamentals with AI-assisted workflows to take ideas from concept to working build fast.
+    </p>
+  </div>
+
+  <!-- ========================================================================
+       MAIN CONTENT AREA
+       ======================================================================== -->
+  <main>
+    <!-- ======================================================================
+         1. HERO SECTION (#about)
+         ====================================================================== -->
+    <section id="about" class="relative overflow-hidden pcb-grid-bg border-b border-slate-200/80 dark:border-slate-800/80">
+      <!-- Ambient Radial Telemetry Glow -->
+      <div aria-hidden="true" class="no-print pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[42rem] h-[24rem] rounded-full bg-cyan-500/10 dark:bg-cyan-500/15 blur-3xl"></div>
+      <div aria-hidden="true" class="no-print pointer-events-none absolute bottom-0 right-0 w-[24rem] h-[18rem] rounded-full bg-emerald-500/10 dark:bg-emerald-500/10 blur-3xl"></div>
+
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <!-- Left Column: Primary Identity, Bio & Actions -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Status & Location Pills -->
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 shadow-glow-emerald">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                Open to Entry-Level Roles • Available Dec 20, 2026
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono bg-slate-200/70 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border border-slate-300/70 dark:border-slate-700/80">
+                <svg class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                Metro Manila, Philippines
+              </span>
+            </div>
+
+            <!-- Name & Headline -->
+            <div class="space-y-3">
+              <p class="font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold">
+                // COMPUTER ENGINEERING PORTFOLIO
+              </p>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.08]">
+                Tristan Reyes
+              </h1>
+              <h2 class="text-lg sm:text-xl lg:text-2xl font-semibold text-slate-700 dark:text-slate-200 leading-snug">
+                4th-Year Computer Engineering Student — Embedded Systems, IoT Applications, Full-Stack Development &amp; Rapid Prototyping
+              </h2>
+            </div>
+
+            <!-- Exact Bio -->
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+              I’m a 4th-year Computer Engineering student specializing in embedded systems, IoT applications, and front-end and back-end development. From wiring microcontrollers to building responsive interfaces and scalable server logic, I combine solid engineering fundamentals with AI-assisted workflows to take ideas from concept to working build fast.
+            </p>
+
+            <!-- Domain Focus Tags -->
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl text-xs font-mono font-medium bg-white dark:bg-slate-900/90 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/25 shadow-sm">
+                Embedded Systems
+              </span>
+              <span class="px-3 py-1.5 rounded-xl text-xs font-mono font-medium bg-white dark:bg-slate-900/90 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/25 shadow-sm">
+                IoT
+              </span>
+              <span class="px-3 py-1.5 rounded-xl text-xs font-mono font-medium bg-white dark:bg-slate-900/90 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/25 shadow-sm">
+                Front-End &amp; Back-End Dev
+              </span>
+              <span class="px-3 py-1.5 rounded-xl text-xs font-mono font-medium bg-white dark:bg-slate-900/90 text-slate-700 dark:text-emerald-300 border border-slate-200 dark:border-emerald-500/25 shadow-sm">
+                Rapid AI-Assisted Prototyping
+              </span>
+            </div>
+
+            <!-- Primary CTA Buttons -->
+            <div id="hero-ctas" class="no-print flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href="#projects"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-slate-900 hover:bg-slate-800 dark:bg-cyan-500 dark:hover:bg-cyan-400 text-white dark:text-slate-950 shadow-glow-cyan transition-all"
+              >
+                <span>View Projects</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+
+              <a
+                href="#resume"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 transition-all"
+              >
+                <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>View Interactive Resume</span>
+              </a>
+
+              <a
+                href="https://github.com/Seytri"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-white/70 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 transition-all"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                </svg>
+                <span>GitHub</span>
+              </a>
+            </div>
+
+            <!-- Quick Contact Bar (Email Copy + Mailto + LinkedIn + GitHub) -->
+            <div class="no-print pt-2 flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+              <div class="inline-flex items-center rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 overflow-hidden shadow-sm">
+                <a
+                  href="mailto:tristanreyes885@gmail.com"
+                  class="inline-flex items-center gap-2 px-3 py-2 font-mono text-xs text-slate-700 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                  title="Send email via mail client"
+                >
+                  <svg class="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <span>tristanreyes885@gmail.com</span>
+                </a>
+                <button
+                  type="button"
+                  onclick="copyEmailAddress()"
+                  aria-label="Copy email address"
+                  title="Copy email to clipboard"
+                  class="px-2.5 py-2 border-l border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1 font-mono text-[11px]"
+                >
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+
+              <a
+                href="https://www.linkedin.com/in/tristan-reyes-2728a8262/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
+                class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-slate-300 hover:border-cyan-500/50 hover:text-cyan-600 dark:hover:text-cyan-400 font-mono text-xs transition-colors"
+              >
+                <svg class="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Hardware-to-Cloud System Architecture Telemetry Card -->
+          <div id="hero-visual-panel" class="no-print lg:col-span-5">
+            <div class="rounded-2xl bg-white/90 dark:bg-obsidian-900/90 border border-slate-200/90 dark:border-slate-800/90 p-5 sm:p-6 shadow-xl dark:shadow-2xl backdrop-blur-md">
+              <!-- Window Header Bar -->
+              <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  <span class="ml-2 font-mono text-xs text-slate-500 dark:text-slate-400">system_overview.sys</span>
+                </div>
+                <span class="font-mono text-[11px] px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-500/20">
+                  READY // DEC 2026
+                </span>
+              </div>
+
+              <!-- Hardware-to-Software Stack Layers -->
+              <div class="space-y-3">
+                <!-- Layer 1 -->
+                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[11px] uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-semibold">
+                      01 // Edge &amp; Embedded Layer
+                    </span>
+                    <span class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400">ACTIVE</span>
+                  </div>
+                  <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                    Raspberry Pi 4 • Arduino • Sensors &amp; Relays
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Real-time control loops, PCB design &amp; digital logic circuits.
+                  </p>
+                </div>
+
+                <!-- Layer 2 -->
+                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[11px] uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-semibold">
+                      02 // Telemetry &amp; Network Layer
+                    </span>
+                    <span class="font-mono text-[10px] text-cyan-600 dark:text-cyan-400">MQTT / IP</span>
+                  </div>
+                  <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                    MQTT Brokers • Wireshark • Linux (Ubuntu)
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Packet inspection, broker messaging &amp; edge-to-cloud pipelines.
+                  </p>
+                </div>
+
+                <!-- Layer 3 -->
+                <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[11px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold">
+                      03 // Full-Stack &amp; AI Automation
+                    </span>
+                    <span class="font-mono text-[10px] text-emerald-600 dark:text-emerald-400">GEMINI API</span>
+                  </div>
+                  <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                    Web Apps • Make Workflows • Rapid Prototyping
+                  </p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    Full-stack interfaces &amp; AI-assisted development pipelines.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Bottom Metric Strip -->
+              <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 grid grid-cols-3 gap-2 text-center">
+                <div class="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-900">
+                  <div class="font-mono text-base sm:text-lg font-bold text-slate-900 dark:text-white">6+</div>
+                  <div class="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">Eng Builds</div>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-900">
+                  <div class="font-mono text-base sm:text-lg font-bold text-cyan-600 dark:text-cyan-400">4th Yr</div>
+                  <div class="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">BS CpE</div>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-100/80 dark:bg-slate-900">
+                  <div class="font-mono text-base sm:text-lg font-bold text-emerald-600 dark:text-emerald-400">Dec '26</div>
+                  <div class="font-mono text-[10px] uppercase text-slate-500 dark:text-slate-400">Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         2. FEATURED & ENGINEERING PROJECTS (#projects)
+         ====================================================================== -->
+    <section id="projects-section" class="py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div id="projects" class="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header & Interactive Filter Tabs -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold mb-2">
+              // ENGINEERING BUILDS &amp; CASE STUDIES
+            </p>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Featured &amp; Engineering Projects
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
+              From dual-microcontroller IoT agricultural systems to AI-automated pipelines and 3D CAD assemblies. Click any project card to inspect the technical case study.
+            </p>
+          </div>
+
+          <!-- Interactive Category Filter Tabs -->
+          <div role="tablist" aria-label="Filter projects by category" class="flex flex-wrap gap-2">
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-filter="All"
+              class="filter-tab active px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 border border-cyan-600 dark:border-cyan-500 transition-all"
+            >
+              All (6)
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-filter="IoT & Embedded"
+              class="filter-tab px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
+            >
+              IoT &amp; Embedded (3)
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-filter="Software & AI"
+              class="filter-tab px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
+            >
+              Software &amp; AI (2)
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              data-filter="CAD & Simulation"
+              class="filter-tab px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
+            >
+              CAD &amp; Simulation (1)
+            </button>
+          </div>
+        </div>
+
+        <!-- Projects Grid (Populated & Filtered via JS for clean Case Study Modal binding) -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Cards rendered dynamically from structured project data -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         3. FOCUS & ENGINEERING APPROACH ("WHAT I DO")
+         ====================================================================== -->
+    <section id="approach-section" class="py-16 sm:py-20 bg-slate-100/60 dark:bg-obsidian-900/50 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold mb-2">
+            // METHODOLOGY &amp; FOCUS
+          </p>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+            What I Do
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card 01 -->
+          <div class="telemetry-card rounded-2xl p-6 sm:p-8 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 shadow-sm">
+            <div class="flex items-center justify-between mb-5">
+              <span class="font-mono text-xs font-bold px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-500/20">
+                CARD 01 // WORKFLOW
+              </span>
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+              Vibe Coding &amp; Rapid Prototyping
+            </h3>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              Building web apps, automations, and utility tools with AI coding assistants and prompt-driven workflows, iterating rapidly from idea to deployment.
+            </p>
+            <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap gap-2">
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">Prompt-Driven Dev</span>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">Fast MVP Iteration</span>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">Workflow Automation</span>
+            </div>
+          </div>
+
+          <!-- Card 02 -->
+          <div class="telemetry-card rounded-2xl p-6 sm:p-8 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 shadow-sm">
+            <div class="flex items-center justify-between mb-5">
+              <span class="font-mono text-xs font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+                CARD 02 // CORE ENGINEERING
+              </span>
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">
+              Core Hardware &amp; Software Interests
+            </h3>
+            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              Embedded firmware, microcontroller-sensor interfacing, PCB design, IoT telemetry (MQTT), and full-stack software engineering.
+            </p>
+            <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap gap-2">
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">Embedded Firmware</span>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">PCB &amp; Sensors</span>
+              <span class="font-mono text-[11px] px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300">MQTT &amp; Full-Stack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         4. CATEGORIZED TECH STACK & TOOLBOX (#skills)
+         ====================================================================== -->
+    <section id="skills-section" class="py-16 sm:py-24 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div id="skills" class="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-10">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold mb-2">
+            // TECHNICAL CAPABILITIES
+          </p>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+            Tech Stack &amp; Engineering Toolbox
+          </h2>
+          <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
+            A cross-disciplinary toolkit spanning low-level microcontroller programming, network telemetry diagnostics, full-stack web engineering, AI automation, and 3D CAD.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Category 1: Languages -->
+          <div class="print-clean-surface print-break-inside-avoid rounded-2xl p-6 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-mono text-xs font-bold">
+                &lt;/&gt;
+              </div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">Languages</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">C++</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Python</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Java</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">HTML/CSS/JavaScript</span>
+            </div>
+          </div>
+
+          <!-- Category 2: Hardware & Embedded -->
+          <div class="print-clean-surface print-break-inside-avoid rounded-2xl p-6 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">
+                MCU
+              </div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">Hardware &amp; Embedded</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Raspberry Pi 4</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Arduino</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Digital Logic Circuits</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">PCB Design</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Sensor &amp; Relay Interfacing</span>
+            </div>
+          </div>
+
+          <!-- Category 3: Networking & Security Labs -->
+          <div class="print-clean-surface print-break-inside-avoid rounded-2xl p-6 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-mono text-xs font-bold">
+                NET
+              </div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">Networking &amp; Security Labs</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Wireshark</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Nmap</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">MQTT Protocol Analysis</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Linux (Ubuntu)</span>
+            </div>
+          </div>
+
+          <!-- Category 4: AI & Automation -->
+          <div class="print-clean-surface print-break-inside-avoid rounded-2xl p-6 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">
+                AI
+              </div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">AI &amp; Automation</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">AI Coding Assistants</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Google AI Studio (Gemini API)</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Make</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Rapid App Prototyping</span>
+            </div>
+          </div>
+
+          <!-- Category 5: Simulation & CAD -->
+          <div class="print-clean-surface print-break-inside-avoid sm:col-span-2 lg:col-span-2 rounded-2xl p-6 bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div class="flex items-center gap-2.5 mb-4">
+              <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-mono text-xs font-bold">
+                CAD
+              </div>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">Simulation &amp; CAD</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Tinkercad</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Siemens Solid Edge</span>
+              <span class="px-3 py-1.5 rounded-xl font-mono text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80">Scilab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         5. INTERACTIVE RESUME / CV SECTION (#resume)
+         ====================================================================== -->
+    <section id="resume-section" class="py-16 sm:py-24 bg-slate-100/50 dark:bg-obsidian-900/40 border-b border-slate-200/80 dark:border-slate-800/80">
+      <div id="resume" class="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header + Print Action -->
+        <div class="no-print flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold mb-2">
+              // CURRICULUM VITAE
+            </p>
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+              Interactive Resume
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
+              Structured academic background, engineering specializations, workshops, and community experience.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            onclick="triggerPrintResume()"
+            class="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white border border-slate-700 transition-colors"
+          >
+            <svg class="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Export / Print Clean PDF</span>
+          </button>
+        </div>
+
+        <!-- Resume Sheet Container -->
+        <div class="print-clean-surface rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 shadow-lg p-6 sm:p-10 space-y-8">
+          <!-- Resume Top Identity Bar (Visible on screen; print uses .print-only-header) -->
+          <div class="no-print pb-6 border-b border-slate-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">Tristan Reyes</h3>
+              <p class="text-sm font-medium text-cyan-600 dark:text-cyan-400 mt-0.5">
+                4th-Year Computer Engineering Student — Embedded Systems, IoT Applications, Full-Stack Development &amp; Rapid Prototyping
+              </p>
+            </div>
+            <div class="flex flex-col sm:items-end gap-1 font-mono text-xs text-slate-600 dark:text-slate-400">
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Open to Entry-Level Roles • Available Dec 20, 2026</span>
+              <span>Metro Manila, Philippines • tristanreyes885@gmail.com</span>
+            </div>
+          </div>
+
+          <!-- Two-Column Grid: Education & Core Focus Areas -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Education Block -->
+            <div class="lg:col-span-6 print-break-inside-avoid">
+              <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-bold mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                Education
+              </h4>
+              <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                  <h5 class="font-bold text-base text-slate-900 dark:text-white">
+                    B.S. in Computer Engineering
+                  </h5>
+                  <span class="font-mono text-xs px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                    Workforce Ready Dec 20, 2026
+                  </span>
+                </div>
+                <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
+                  4th Year Undergraduate • Philippines
+                </p>
+                <p class="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Coursework and capstone specialization in embedded microcontroller systems, IoT telemetry networks, digital logic design, computer networking, and full-stack software engineering.
+                </p>
+              </div>
+            </div>
+
+            <!-- Focus Areas Block -->
+            <div class="lg:col-span-6 print-break-inside-avoid">
+              <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-bold mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Focus Areas
+              </h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="font-mono text-[11px] text-cyan-600 dark:text-cyan-400 mb-1">01</div>
+                  <div class="font-semibold text-sm text-slate-900 dark:text-white">Hardware-Software Integration</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="font-mono text-[11px] text-cyan-600 dark:text-cyan-400 mb-1">02</div>
+                  <div class="font-semibold text-sm text-slate-900 dark:text-white">Embedded Systems</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 mb-1">03</div>
+                  <div class="font-semibold text-sm text-slate-900 dark:text-white">IoT Applications</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80">
+                  <div class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 mb-1">04</div>
+                  <div class="font-semibold text-sm text-slate-900 dark:text-white">Back-End &amp; Web Development</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workshops, Labs & Community Experience -->
+          <div class="pt-4 border-t border-slate-200 dark:border-slate-800 print-break-inside-avoid">
+            <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-bold mb-5 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+              Workshops, Technical Labs &amp; Community Experience
+            </h4>
+
+            <div class="space-y-4">
+              <!-- Item 1 -->
+              <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h5 class="font-bold text-base text-slate-900 dark:text-white">
+                      IoT Traffic Capture &amp; MQTT Protocol Analysis Lab
+                    </h5>
+                    <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
+                      EC-Council iLabs
+                    </span>
+                  </div>
+                  <p class="text-sm text-slate-600 dark:text-slate-300">
+                    Performed live packet capture and telemetry inspection using <strong class="font-medium text-slate-800 dark:text-slate-100">Wireshark</strong> and <strong class="font-medium text-slate-800 dark:text-slate-100">MQTT Explorer</strong> to analyze IoT publish/subscribe message flows, broker topics, and network traffic behavior.
+                  </p>
+                </div>
+                <span class="font-mono text-xs text-slate-500 dark:text-slate-400 shrink-0">
+                  Networking &amp; IoT Lab
+                </span>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h5 class="font-bold text-base text-slate-900 dark:text-white">
+                      BITSKWELA Web3 &amp; Blockchain Fundamentals Seminar
+                    </h5>
+                    <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                      STI College Global City
+                    </span>
+                  </div>
+                  <p class="text-sm text-slate-600 dark:text-slate-300">
+                    Completed technical sessions on decentralized ledger architecture, smart contract fundamentals, and emerging Web3 application ecosystems.
+                  </p>
+                </div>
+                <span class="font-mono text-xs text-slate-500 dark:text-slate-400 shrink-0">
+                  Sept 2026
+                </span>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div class="space-y-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h5 class="font-bold text-base text-slate-900 dark:text-white">
+                      Community Digital Literacy Volunteer
+                    </h5>
+                    <span class="font-mono text-[11px] px-2.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                      Civic Outreach
+                    </span>
+                  </div>
+                  <p class="text-sm text-slate-600 dark:text-slate-300">
+                    Assisted senior citizens in navigating digital cash-assistance mobile applications, troubleshooting account verification workflows, and systematically organizing beneficiary records.
+                  </p>
+                </div>
+                <span class="font-mono text-xs text-slate-500 dark:text-slate-400 shrink-0">
+                  Community Service
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Selected Engineering Projects Summary (Shown cleanly in Print PDF so resume has full project coverage) -->
+          <div class="hidden print:block pt-4 border-t border-slate-300 print-break-inside-avoid">
+            <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-800 font-bold mb-3">
+              Selected Engineering Projects
+            </h4>
+            <ul class="space-y-2 text-xs text-slate-800">
+              <li>
+                <strong>IoT-Based Hybrid Drying System for Paddy Rice and Coconut Kernels (Capstone | In Development):</strong> Combines Raspberry Pi 4 and Arduino with environmental sensors, solar and infrared backup heating, relay switching, and automated grain agitation for real-time telemetry monitoring and controlled drying.
+              </li>
+              <li>
+                <strong>PBOT Jr Autonomous Line-Following Robot Controller:</strong> Simulated and programmed in Tinkercad using a 3-channel infrared sensor array, microcontroller decision logic, and motor driver control for responsive path tracking.
+              </li>
+              <li>
+                <strong>AI-Powered Email Triage &amp; Auto-Drafting Pipeline:</strong> Automated inbox workflow built using Make and Google AI Studio (Gemini API) integrated with Google Sheets, Notion, and instant messaging alerts.
+              </li>
+              <li>
+                <strong>Electrical Circuit &amp; Ohm’s Law Utility Suite &amp; 8-LED Programmable Sequence Controller:</strong> Desktop Java &amp; Swing engineering calculator suite alongside microcontroller timing and digital logic circuits verified in Tinkercad.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         6. CONTACT & DIRECT OUTREACH SECTION (#contact)
+         ====================================================================== -->
+    <section id="contact-section" class="no-print py-16 sm:py-24">
+      <div id="contact" class="scroll-mt-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          <!-- Left Column: Direct Channels -->
+          <div class="lg:col-span-6 space-y-6">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400 font-semibold mb-2">
+                // GET IN TOUCH
+              </p>
+              <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+                Let’s Build Something Reliable
+              </h2>
+              <p class="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                Available for entry-level roles in Embedded Systems, IoT Engineering, Full-Stack Software Development, or Rapid Prototyping starting <strong class="text-slate-900 dark:text-white">December 20, 2026</strong>. Reach out directly via email or connect on LinkedIn and GitHub.
+              </p>
+            </div>
+
+            <!-- Direct Contact Cards -->
+            <div class="space-y-3">
+              <!-- Email Card -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-mono text-[11px] uppercase text-slate-500 dark:text-slate-400">Direct Email</div>
+                    <a href="mailto:tristanreyes885@gmail.com" class="font-mono text-sm font-semibold text-slate-900 dark:text-white hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+                      tristanreyes885@gmail.com
+                    </a>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onclick="copyEmailAddress()"
+                  class="px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/15 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700 transition-colors"
+                >
+                  Copy Email
+                </button>
+              </div>
+
+              <!-- LinkedIn Card -->
+              <a
+                href="https://www.linkedin.com/in/tristan-reyes-2728a8262/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-4 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 flex items-center justify-between gap-3 transition-all group"
+              >
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-mono text-[11px] uppercase text-slate-500 dark:text-slate-400">LinkedIn</div>
+                    <div class="font-mono text-sm font-semibold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                      linkedin.com/in/tristan-reyes-2728a8262
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-slate-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <!-- GitHub Card -->
+              <a
+                href="https://github.com/Seytri"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-4 rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 flex items-center justify-between gap-3 transition-all group"
+              >
+                <div class="flex items-center gap-3.5">
+                  <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-mono text-[11px] uppercase text-slate-500 dark:text-slate-400">GitHub</div>
+                    <div class="font-mono text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                      github.com/Seytri
+                    </div>
+                  </div>
+                </div>
+                <svg class="w-4 h-4 text-slate-400 group-hover:text-emerald-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: Quick Recruiter Outreach Composer (Generates prefilled mailto) -->
+          <div class="lg:col-span-6">
+            <div class="rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white">Quick Outreach Composer</h3>
+                <span class="font-mono text-[11px] text-cyan-600 dark:text-cyan-400">MAILTO DISPATCH</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-5">
+                Draft an interview invite or project inquiry below—it opens directly in your email client addressed to <span class="font-mono text-slate-800 dark:text-slate-200">tristanreyes885@gmail.com</span>.
+              </p>
+
+              <form id="outreach-form" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="sender-name" class="block font-mono text-xs text-slate-600 dark:text-slate-300 mb-1.5">Your Name / Organization</label>
+                    <input
+                      id="sender-name"
+                      type="text"
+                      required
+                      placeholder="e.g., Alex Santos • TechCorp"
+                      class="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+                    />
+                  </div>
+                  <div>
+                    <label for="inquiry-topic" class="block font-mono text-xs text-slate-600 dark:text-slate-300 mb-1.5">Opportunity Type</label>
+                    <select
+                      id="inquiry-topic"
+                      class="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500"
+                    >
+                      <option value="Entry-Level Engineering Role">Entry-Level Engineering Role</option>
+                      <option value="Embedded / IoT Engineering Opportunity">Embedded / IoT Engineering</option>
+                      <option value="Full-Stack / Software Developer Role">Full-Stack / Software Dev</option>
+                      <option value="Project Collaboration">Project Collaboration</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="inquiry-message" class="block font-mono text-xs text-slate-600 dark:text-slate-300 mb-1.5">Message</label>
+                  <textarea
+                    id="inquiry-message"
+                    rows="4"
+                    required
+                    placeholder="Hi Tristan, we reviewed your Computer Engineering portfolio and would love to schedule a conversation regarding..."
+                    class="w-full px-3.5 py-2.5 rounded-xl text-sm bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-cyan-600 hover:bg-cyan-500 dark:bg-cyan-500 dark:hover:bg-cyan-400 text-white dark:text-slate-950 shadow-glow-cyan transition-all"
+                >
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                  </svg>
+                  <span>Compose Email to Tristan</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="no-print border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-obsidian-950 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+        <span class="font-mono text-xs text-cyan-600 dark:text-cyan-400">[TR.SYS]</span>
+        <span>&copy; 2026 Tristan Reyes. Built for speed, clarity &amp; engineering craft.</span>
+      </div>
+
+      <div class="flex items-center gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
+        <a href="https://github.com/Seytri" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/tristan-reyes-2728a8262/" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">LinkedIn</a>
+        <a href="#about" class="inline-flex items-center gap-1 text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+          <span>Top</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PROJECT CASE STUDY MODAL
+       ======================================================================== -->
+  <div
+    id="project-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    class="no-print fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+  >
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="modal-backdrop fixed inset-0 bg-slate-950/75 backdrop-blur-sm opacity-0"></div>
+
+    <!-- Modal Panel -->
+    <div id="modal-panel" class="modal-panel relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-obsidian-900 border border-slate-200 dark:border-slate-700/80 shadow-2xl p-6 sm:p-8 opacity-0 scale-95">
+      <!-- Top Bar -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div class="space-y-1.5">
+          <div id="modal-badges" class="flex flex-wrap items-center gap-2"></div>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug">
+            Project Title
+          </h3>
+        </div>
+        <button
+          id="modal-close-btn"
+          type="button"
+          aria-label="Close modal"
+          class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-cyan-500 transition-colors shrink-0"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="mt-5 space-y-5">
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-cyan-600 dark:text-cyan-400 font-semibold mb-1.5">
+            System Overview
+          </h4>
+          <p id="modal-summary" class="text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800/80">
+          <h4 class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold mb-2">
+            Architecture &amp; Engineering Highlights
+          </h4>
+          <ul id="modal-highlights" class="space-y-2 text-sm text-slate-700 dark:text-slate-300 list-disc list-inside"></ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold mb-2">
+            Hardware, Software &amp; Tools Used
+          </h4>
+          <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="mt-7 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <a
+          href="https://github.com/Seytri"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 dark:bg-cyan-500 text-white dark:text-slate-950 hover:opacity-90 transition-opacity"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+          </svg>
+          <span>Explore on GitHub (@Seytri)</span>
+        </a>
+        <button
+          type="button"
+          onclick="closeProjectModal()"
+          class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+        >
+          Close Case Study
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOAST NOTIFICATION CONTAINER (For One-Click Email Copy & Feedback)
+       ======================================================================== -->
+  <div
+    id="toast-container"
+    aria-live="polite"
+    class="no-print fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2"
+  ></div>
+
+  <!-- ========================================================================
+       INTERACTIVE APPLICATION LOGIC
+       ======================================================================== -->
+  <script>
+    /**
+     * Structured Engineering Projects Dataset
+     * Each entry powers both the filterable project grid and the detailed Case Study Modal.
+     */
+    const PROJECTS_DATA = [
+      {
+        id: 'hybrid-drying-system',
+        title: 'IoT-Based Hybrid Drying System for Paddy Rice and Coconut Kernels',
+        category: 'IoT & Embedded',
+        featured: true,
+        status: 'Featured Capstone • In Development',
+        summary:
+          'Combines a Raspberry Pi 4 and Arduino with environmental sensors, solar and infrared backup heating, relay switching, and automated grain agitation for real-time telemetry monitoring and controlled drying.',
+        highlights: [
+          'Dual-controller edge architecture: Arduino manages deterministic sensor polling and relay switching while Raspberry Pi 4 handles data logging, telemetry aggregation, and dashboard services.',
+          'Closed-loop environmental monitoring tracks chamber temperature and relative humidity to dynamically balance primary solar heat with infrared backup heating elements.',
+          'Automated mechanical grain agitation and multi-channel relay protection prevent localized overheating and ensure uniform moisture reduction for paddy rice and copra.'
+        ],
+        tags: ['Raspberry Pi 4', 'Arduino', 'IoT Telemetry', 'Relay Switching', 'Environmental Sensors', 'C++ / Python']
+      },
+      {
+        id: 'pbot-jr-robot',
+        title: 'PBOT Jr Autonomous Line-Following Robot Controller',
+        category: 'IoT & Embedded',
+        featured: false,
+        status: 'Simulation & Firmware',
+        summary:
+          'Simulated and programmed in Tinkercad using a 3-channel infrared sensor array, microcontroller decision logic, and motor driver control for responsive path tracking.',
+        highlights: [
+          'Reads real-time reflectance states from a 3-channel infrared sensor array (left, center, right) to detect track alignment and sharp curvature transitions.',
+          'Implements deterministic embedded C++ state logic driving dual DC motors through an H-bridge motor driver with PWM speed modulation.',
+          'Verified sensor threshold calibration, turning recovery routines, and circuit wiring inside Tinkercad simulation.'
+        ],
+        tags: ['Tinkercad', 'Embedded C++', '3-Ch IR Sensor Array', 'Motor Driver Control', 'Microcontrollers']
+      },
+      {
+        id: 'led-sequence-controller',
+        title: '8-LED Programmable Sequence Controller',
+        category: 'IoT & Embedded',
+        featured: false,
+        status: 'Digital Logic & Timing',
+        summary:
+          'Microcontroller timing and digital logic circuit designed and verified in Tinkercad.',
+        highlights: [
+          'Engineered an 8-channel discrete output stage with properly rated current-limiting resistors and clean breadboard bus routing.',
+          'Programmed deterministic timing intervals and multi-mode bit-shifting LED patterns using microcontroller digital I/O control.',
+          'Validated signal timing, pin states, and circuit safety inside Tinkercad.'
+        ],
+        tags: ['Tinkercad', 'Digital Logic Circuits', 'Microcontroller Timing', 'C++']
+      },
+      {
+        id: 'ai-email-triage',
+        title: 'AI-Powered Email Triage & Auto-Drafting Pipeline',
+        category: 'Software & AI',
+        featured: false,
+        status: 'AI Workflow Automation',
+        summary:
+          'Automated inbox workflow built using Make and Google AI Studio (Gemini API) integrated with Google Sheets, Notion, and instant messaging alerts.',
+        highlights: [
+          'Connects incoming email triggers in Make to Google AI Studio (Gemini API) for intent classification, urgency scoring, and context-aware reply drafting.',
+          'Automatically logs structured message metadata and triage summaries into Google Sheets and Notion databases for searchable tracking.',
+          'Dispatches real-time instant messaging alerts for high-priority messages to accelerate response times.'
+        ],
+        tags: ['Make', 'Google AI Studio (Gemini API)', 'Google Sheets', 'Notion', 'Prompt Engineering']
+      },
+      {
+        id: 'circuit-ohms-law-suite',
+        title: 'Electrical Circuit & Ohm’s Law Utility Suite',
+        category: 'Software & AI',
+        featured: false,
+        status: 'Desktop Engineering Tool',
+        summary:
+          'Desktop Java & Swing application for computing voltage, current, and resistance alongside a modular Java calculator.',
+        highlights: [
+          'Built an interactive Java Swing desktop interface enabling rapid computation of Voltage (V), Current (I), Resistance (R), and electrical power.',
+          'Includes input validation, clear error feedback, and modular object-oriented arithmetic utilities paired with a general-purpose Java calculator.',
+          'Designed to streamline benchtop circuit verification and lab calculations.'
+        ],
+        tags: ['Java', 'Java Swing', 'OOP', 'Circuit Analysis']
+      },
+      {
+        id: 'solid-edge-cad-models',
+        title: 'Concrete Beam Bridge & Mechanical 3D Models',
+        category: 'CAD & Simulation',
+        featured: false,
+        status: '3D Structural & Mechanical CAD',
+        summary:
+          'Structural and mechanical assemblies modeled in Siemens Solid Edge with environmental visualizations.',
+        highlights: [
+          'Modeled multi-part structural concrete beam bridge geometry and precision mechanical assemblies in Siemens Solid Edge.',
+          'Applied parametric constraints, dimensional tolerances, and assembly mates to verify structural fit and alignment.',
+          'Produced realistic environmental scene visualizations for engineering design presentation.'
+        ],
+        tags: ['Siemens Solid Edge', '3D CAD Modeling', 'Structural Assemblies', 'Visualization']
+      }
+    ];
+
+    let activeCategory = 'All';
+
+    /**
+     * Render Project Cards into #projects-grid based on active filter
+     */
+    function renderProjects(category = 'All') {
+      const grid = document.getElementById('projects-grid');
+      if (!grid) return;
+
+      const filtered =
+        category === 'All'
+          ? PROJECTS_DATA
+          : PROJECTS_DATA.filter((project) => project.category === category);
+
+      grid.innerHTML = filtered
+        .map((project) => {
+          const isFeatured = project.featured;
+          const cardSpanClass = isFeatured && category === 'All' ? 'md:col-span-2 lg:col-span-2' : '';
+          const borderAccent = isFeatured
+            ? 'border-cyan-500/40 dark:border-cyan-500/40 ring-1 ring-cyan-500/15'
+            : 'border-slate-200 dark:border-slate-800 hover:border-cyan-500/50';
+
+          const badgeHtml = isFeatured
+            ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
+                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                 ${project.status}
+               </span>`
+            : `<span class="inline-flex items-center px-2.5 py-1 rounded-lg font-mono text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80">
+                 ${project.status}
+               </span>`;
+
+          const tagsHtml = project.tags
+            .slice(0, isFeatured ? 6 : 4)
+            .map(
+              (tag) =>
+                `<span class="px-2.5 py-1 rounded-lg font-mono text-[11px] bg-slate-50 dark:bg-slate-950/80 text-slate-600 dark:text-slate-300 border border-slate-200/70 dark:border-slate-800">${tag}</span>`
+            )
+            .join('');
+
+          return `
+            <article
+              onclick="openProjectModal('${project.id}')"
+              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectModal('${project.id}');}"
+              tabindex="0"
+              role="button"
+              aria-label="Inspect case study for ${project.title}"
+              class="telemetry-card cursor-pointer group flex flex-col justify-between rounded-2xl p-6 bg-white dark:bg-obsidian-900 border ${borderAccent} shadow-sm ${cardSpanClass} focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            >
+              <div>
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                  ${badgeHtml}
+                  <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400">
+                    ${project.category}
+                  </span>
+                </div>
+
+                <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors leading-snug">
+                  ${project.title}
+                </h3>
+
+                <p class="mt-2.5 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  ${project.summary}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  ${tagsHtml}
+                </div>
+                <div class="flex items-center justify-between font-mono text-xs font-semibold text-cyan-600 dark:text-cyan-400">
+                  <span>Inspect Case Study</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    /**
+     * Category Filter Tab Handler
+     */
+    function initProjectFilters() {
+      const tabs = document.querySelectorAll('.filter-tab');
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const selected = tab.getAttribute('data-filter');
+          activeCategory = selected;
+
+          tabs.forEach((t) => {
+            const isMatch = t === tab;
+            t.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+            if (isMatch) {
+              t.className =
+                'filter-tab active px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 border border-cyan-600 dark:border-cyan-500 transition-all';
+            } else {
+              t.className =
+                'filter-tab px-3.5 py-2 rounded-xl text-xs font-mono font-semibold bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all';
+            }
+          });
+
+          renderProjects(selected);
+        });
+      });
+    }
+
+    /**
+     * Open Project Case Study Modal
+     */
+    function openProjectModal(projectId) {
+      const project = PROJECTS_DATA.find((p) => p.id === projectId);
+      if (!project) return;
+
+      const modal = document.getElementById('project-modal');
+      const backdrop = document.getElementById('modal-backdrop');
+      const panel = document.getElementById('modal-panel');
+
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-summary').textContent = project.summary;
+
+      document.getElementById('modal-badges').innerHTML = `
+        <span class="px-2.5 py-1 rounded-lg font-mono text-xs font-semibold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
+          ${project.status}
+        </span>
+        <span class="px-2.5 py-1 rounded-lg font-mono text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+          ${project.category}
+        </span>
+      `;
+
+      document.getElementById('modal-highlights').innerHTML = project.highlights
+        .map((item) => `<li>${item}</li>`)
+        .join('');
+
+      document.getElementById('modal-tags').innerHTML = project.tags
+        .map(
+          (tag) =>
+            `<span class="px-3 py-1 rounded-xl font-mono text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700">${tag}</span>`
+        )
+        .join('');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        panel.classList.remove('opacity-0', 'scale-95');
+        panel.classList.add('opacity-100', 'scale-100');
+      });
+
+      document.getElementById('modal-close-btn').focus();
+    }
+
+    /**
+     * Close Project Case Study Modal
+     */
+    function closeProjectModal() {
+      const modal = document.getElementById('project-modal');
+      const backdrop = document.getElementById('modal-backdrop');
+      const panel = document.getElementById('modal-panel');
+
+      backdrop.classList.add('opacity-0');
+      panel.classList.remove('opacity-100', 'scale-100');
+      panel.classList.add('opacity-0', 'scale-95');
+
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 200);
+    }
+
+    /**
+     * One-Click Copy Email Address using document.execCommand('copy')
+     * Works reliably across standard browsers and sandboxed iframes.
+     */
+    function copyEmailAddress() {
+      const email = 'tristanreyes885@gmail.com';
+      const tempInput = document.createElement('textarea');
+      tempInput.value = email;
+      tempInput.setAttribute('readonly', '');
+      tempInput.style.position = 'fixed';
+      tempInput.style.opacity = '0';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      tempInput.setSelectionRange(0, 99999);
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (err) {
+        copied = false;
+      }
+      document.body.removeChild(tempInput);
+
+      if (copied) {
+        showToast('Copied tristanreyes885@gmail.com to clipboard', 'success');
+      } else {
+        showToast('Email: tristanreyes885@gmail.com', 'info');
+      }
+    }
+
+    /**
+     * Non-blocking Toast Notification Helper
+     */
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const accentClass =
+        type === 'success'
+          ? 'border-emerald-500/40 text-emerald-700 dark:text-emerald-300'
+          : 'border-cyan-500/40 text-cyan-700 dark:text-cyan-300';
+
+      toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border ${accentClass} shadow-xl font-mono text-xs transition-all duration-300 transform translate-y-2 opacity-0`;
+      toast.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    /**
+     * Trigger Browser Print Dialog for Clean PDF Resume Export
+     */
+    function triggerPrintResume() {
+      window.print();
+    }
+
+    /**
+     * Dark / Light Mode Theme Toggle (Defaults to Dark Mode)
+     */
+    function initThemeToggle() {
+      const htmlEl = document.documentElement;
+      const toggleBtn = document.getElementById('theme-toggle');
+
+      // Check saved theme preference; default to 'dark'
+      try {
+        const savedTheme = localStorage.getItem('tr-portfolio-theme');
+        if (savedTheme === 'light') {
+          htmlEl.classList.remove('dark');
+        } else {
+          htmlEl.classList.add('dark');
+        }
+      } catch (e) {
+        htmlEl.classList.add('dark');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const isDark = htmlEl.classList.toggle('dark');
+        try {
+          localStorage.setItem('tr-portfolio-theme', isDark ? 'dark' : 'light');
+        } catch (e) {
+          // Ignore storage restrictions in sandboxed environments
+        }
+      });
+    }
+
+    /**
+     * Mobile Navigation Drawer & Modal Listeners
+     */
+    function initNavigationAndModals() {
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const openIcon = document.getElementById('menu-open-icon');
+      const closeIcon = document.getElementById('menu-close-icon');
+
+      mobileBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        mobileBtn.setAttribute('aria-expanded', (!isHidden).toString());
+        openIcon.classList.toggle('hidden', !isHidden);
+        closeIcon.classList.toggle('hidden', isHidden);
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileBtn.setAttribute('aria-expanded', 'false');
+          openIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+
+      // Modal close triggers
+      document.getElementById('modal-close-btn').addEventListener('click', closeProjectModal);
+      document.getElementById('modal-backdrop').addEventListener('click', closeProjectModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('project-modal');
+          if (!modal.classList.contains('hidden')) {
+            closeProjectModal();
+          }
+        }
+      });
+
+      // Quick Outreach Composer Form
+      const outreachForm = document.getElementById('outreach-form');
+      if (outreachForm) {
+        outreachForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const sender = document.getElementById('sender-name').value.trim();
+          const topic = document.getElementById('inquiry-topic').value;
+          const message = document.getElementById('inquiry-message').value.trim();
+
+          const subject = encodeURIComponent(`[Portfolio Inquiry] ${topic} — from ${sender}`);
+          const body = encodeURIComponent(
+            `Hi Tristan,\n\n${message}\n\nBest regards,\n${sender}`
+          );
+
+          showToast('Opening email client addressed to tristanreyes885@gmail.com', 'info');
+          window.location.href = `mailto:tristanreyes885@gmail.com?subject=${subject}&body=${body}`;
+        });
+      }
+    }
+
+    // Initialize Application
+    document.addEventListener('DOMContentLoaded', () => {
+      initThemeToggle();
+      renderProjects('All');
+      initProjectFilters();
+      initNavigationAndModals();
+    });
+  </script>
 </body>
 </html>
